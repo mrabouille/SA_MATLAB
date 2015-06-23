@@ -29,14 +29,13 @@ function [SIc,SI] = rbdfast(X,Y,Index,M)
 %Add: Reordering Y according a random design X.
 %Add: Unbiased estimator from Tissot & Prieur.
 %Note: The estimate is less dependant on the M value which can be raised up to 10.
-%Latest Update: 07 Mar 2013
 %
 %References: 
 %Tarantola S., Gatelli, D. and T. Mara (2006) 
 %Random Balance Designs for the Estimation of First Order 
 %Global Sensitivity Indices, Reliability Engineering and System Safety, 91:6, 717-727
 %
-%Jean-Yves Tissot, Clémentine Prieur (2012)
+%Jean-Yves Tissot, ClÃ©mentine Prieur (2012)
 %Bias correction for the estimation of sensitivity indices based on random balance designs.
 %Reliability Engineering and System Safety, Elsevier,  107, 205-213. <10.1016/j.ress.2012.06.010>. <hal-00507526v2>
 
@@ -94,10 +93,10 @@ for a=1:k
     % Normalization by N-1 to match the definition of the unbiased variance
     % We thus have the same definition as var(Y)
 
-    V=sum(spectrum(2:N));
-    SI(a)=2*sum(spectrum(2:M+1))/V;
+    V=sum(spectrum(2:N,:));
+    SI(a,:)=2*sum(spectrum(2:M+1,:))./V;
     
-    SIc(a)=SI(a)-lamda/(1-lamda)*(1-SI(a));
+    SIc(a,:)=SI(a,:)-lamda/(1-lamda)*(1-SI(a,:));
 
 end	
 end	
