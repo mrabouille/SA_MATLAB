@@ -72,7 +72,7 @@ end
 if size(Y,1)~=N
     error('Arguments dimensions are not consistent')
 end
-if N<(2*M+100)
+if N<2*(M+100)
     warning('RBD:lowSampleSize','Insufficient simulations for proper analysis');
 end
 
