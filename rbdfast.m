@@ -93,11 +93,13 @@ for a=1:k
     end
 
     %-----calculation spe1 at integer frequency
-    spectrum=(abs(fft(Yorg))).^2/(N-1);
+    spectrum=(abs(fft(Yorg))).^2/N/(N-1);
     % Normalization by N-1 to match the definition of the unbiased variance
     % We thus have the same definition as var(Y)
+    % var(Yorg) ~ sum(spectrum(2:end,:))
+    % var(Yorg|Xi) ~ 2*sum(spectrum(2:M+1,:)) = sum(spectrum(2:M+1,:))+sum(spectrum(end:-1:(end+1-M),:))
 
-    V=sum(spectrum(2:N,:));
+    V=sum(spectrum(2:end,:));
     SI(a,:)=2*sum(spectrum(2:M+1,:))./V;
     
     SIc(a,:)=SI(a,:)-lamda/(1-lamda)*(1-SI(a,:));
